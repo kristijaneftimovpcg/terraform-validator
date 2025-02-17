@@ -25,10 +25,10 @@ phases:
 
       - yum install -y wget tar gzip
       - echo "Installing Trivy..."
-      - wget -q https://github.com/aquasecurity/trivy/releases/download/v0.59.1/trivy_0.59.1_FreeBSD-64bit.tar.gz
-      - tar -xzf trivy_0.59.1_FreeBSD-64bit.tar.gz
+      - wget -q https://github.com/aquasecurity/trivy/releases/download/v0.59.1/trivy_0.59.1_Linux-64bit.tar.gz
+      - tar -xzf trivy_0.59.1_Linux-64bit.tar.gz
       - mv trivy /usr/local/bin/
-      - rm trivy_0.59.1_FreeBSD-64bit.tar.gz
+      - rm trivy_0.59.1_Linux-64bit.tar.gz
       - trivy -v
       # - terraform apply -auto-approve # Uncomment this line to apply all changes through the pipeline.
       - echo DONE
