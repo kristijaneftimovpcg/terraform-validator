@@ -22,6 +22,7 @@ module "default_vpc" {
   enable_dns_hostnames = true
 }
 
+
 resource "aws_security_group" "ssh" {
   name        = "ssh-security-group"
   description = "SSH Security Group"
