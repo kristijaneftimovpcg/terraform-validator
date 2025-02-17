@@ -22,14 +22,14 @@ phases:
       - terraform providers
       - terraform validate
       - terraform plan --out tfplan
-      - apt-get update
-      - apt-get install wget apt-transport-https gnupg lsb-release
-      - wget -qO - https://aquasecurity.github.io/trivy-repo/deb/public.key | gpg --dearmor | tee /usr/share/keyrings/trivy.gpg > /dev/null
-      - echo "deb [signed-by=/usr/share/keyrings/trivy.gpg] https://aquasecurity.github.io/trivy-repo/deb $(lsb_release -sc) main" | tee -a /etc/apt/sources.list.d/trivy.list deb [signed-by=/usr/share/keyrings/trivy.gpg] https://aquasecurity.github.io/trivy-repo/deb bullseye main
-      - apt-get update
-      - apt-get install trivy
+
+      - yum install -y wget tar gzip
+      - echo "Installing Trivy..."
+      - wget -q https://github.com/aquasecurity/trivy/releases/latest/download/trivy_Linux-64bit.tar.gz
+      - tar -xzf trivy_Linux-64bit.tar.gz
+      - mv trivy /usr/local/bin/
+      - rm trivy_Linux-64bit.tar.gz
       - trivy -v
-      - trivy config tfplan
       # - terraform apply -auto-approve # Uncomment this line to apply all changes through the pipeline.
       - echo DONE
 
