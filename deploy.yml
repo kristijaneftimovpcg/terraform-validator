@@ -30,6 +30,7 @@ phases:
       - mv trivy /usr/local/bin/
       - rm trivy_0.59.1_Linux-64bit.tar.gz
       - trivy -v
+      - trivy config tfplan
       # - terraform apply -auto-approve # Uncomment this line to apply all changes through the pipeline.
       - echo DONE
 
