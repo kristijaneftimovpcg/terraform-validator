@@ -5,7 +5,6 @@ phases:
     commands:
       - echo Installing Terraform...
       - curl -s -o terraform.zip https://releases.hashicorp.com/terraform/1.9.8/terraform_1.9.8_linux_amd64.zip
-      - curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh
       - unzip terraform.zip
       - mv terraform /usr/local/bin
       - rm terraform.zip
@@ -23,6 +22,7 @@ phases:
       - terraform providers
       - terraform validate
       - terraform plan --out tfplan
+      - curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh
       - trivy config tfplan
       # - terraform apply -auto-approve # Uncomment this line to apply all changes through the pipeline.
       - echo DONE
