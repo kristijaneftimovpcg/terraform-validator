@@ -30,8 +30,14 @@ phases:
       - mv trivy /usr/local/bin/
       - rm trivy_0.59.1_Linux-64bit.tar.gz
       - trivy -v
-      - trivy config tfplan
-      # - terraform apply -auto-approve # Uncomment this line to apply all changes through the pipeline.
+      - echo "Running Trivy scan..."
+      - trivy config tfplan > trivy_output.txt
+
+      # ✅ Check if "Error" exists in the output and stop deployment if found
+      - if grep -i "Failures" trivy_output.txt; then
+          echo "Trivy found errors! Stopping deployment.";
+          exit 1;
+        fi
       - echo DONE
 
 artifacts:
