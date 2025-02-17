@@ -10,16 +10,17 @@ terraform {
     }
   }
 
-  # backend "s3" {
-  #   bucket  = "terraform-validator-bucket"
-  #   key     = "terraform.tfstate"
-  #   region  = "eu-west-1"
-  #   profile = "playground"
-  # }
+  backend "s3" {
+    bucket  = "terraform-validator-bucket-ci-cd"
+    key     = "terraform.tfstate"
+    region  = "eu-west-1"
+    profile = "playground"
+  }
 
   required_version = "~> 1.6"
 }
+
 provider "aws" {
   region  = "eu-west-1"
-  # profile = "playground"
+  profile = "playground"
 }

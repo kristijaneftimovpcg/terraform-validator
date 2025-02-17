@@ -1,0 +1,28 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - echo Installing Terraform...
+      - curl -s -o terraform.zip https://releases.hashicorp.com/terraform/1.9.8/terraform_1.9.8_linux_amd64.zip
+      - unzip terraform.zip
+      - mv terraform /usr/local/bin
+      - rm terraform.zip
+      - echo TERRAFORM VERSION...
+      - terraform --version
+
+  build:
+    commands:
+      - echo Build started on `date`
+      - cd /
+      - echo Preparing for tf init
+      - rm -f .terraform.lock.hcl
+      - terraform init
+      - terraform providers
+      - terraform validate
+      - terraform plan -out=tfplan
+      # - terraform apply -auto-approve # Uncomment this line to apply all changes through the pipeline.
+      - echo DONE
+
+artifacts:
+  files: ["**/*"]
