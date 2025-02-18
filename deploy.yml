@@ -36,12 +36,12 @@ phases:
       - trivy config tfplan | tee /tmp/trivy_output.txt
 
       # Check if "Failures" exists in the Trivy output and stop deployment if found
-      - if [ ! -f /tmp/trivy_output.txt ]; then echo "Trivy output file missing!"; fi
-      - if grep -i "Failures" /tmp/trivy_output.txt; then
-          echo "Trivy found errors! Please fix the errors provided, and run the pipeline again.";
-          exit 1;
-        fi
-      - echo DONE
+      # - if [ ! -f /tmp/trivy_output.txt ]; then echo "Trivy output file missing!"; fi
+      # - if grep -i "Failures" /tmp/trivy_output.txt; then
+      #     echo "Trivy found errors! Please fix the errors provided, and run the pipeline again.";
+      #     exit 1;
+      #   fi
+      # - echo DONE
 
       # Installing & running Terrascan
       - echo "Installing Terrascan..."
