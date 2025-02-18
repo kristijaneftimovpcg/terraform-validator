@@ -3,6 +3,7 @@ version: 0.2
 phases:
   install:
     commands:
+      # Installing Terraform
       - echo Installing Terraform...
       - curl -s -o terraform.zip https://releases.hashicorp.com/terraform/1.9.8/terraform_1.9.8_linux_amd64.zip
       - unzip terraform.zip
@@ -13,6 +14,7 @@ phases:
 
   build:
     commands:
+      # Running Terraform commands
       - echo Build started on `date`
       - ls -al
       - cd infrastructure
@@ -23,6 +25,7 @@ phases:
       - terraform validate
       - terraform plan --out tfplan
 
+      # Installing & running Trivy
       - yum install -y wget tar gzip
       - echo "Installing Trivy..."
       - wget -q https://github.com/aquasecurity/trivy/releases/download/v0.59.1/trivy_0.59.1_Linux-64bit.tar.gz
@@ -31,10 +34,11 @@ phases:
       - rm trivy_0.59.1_Linux-64bit.tar.gz
       - trivy -v
       - echo "Running Trivy scan..."
-      - trivy config tfplan > trivy_output.txt
+      - trivy config tfplan | tee /tmp/trivy_output.txt
 
-      # ✅ Check if "Error" exists in the output and stop deployment if found
-      - if grep -i "Failures" trivy_output.txt; then
+      # Check if "Failures" exists in the output and stop deployment if found
+      - if [ ! -f /tmp/trivy_output.txt ]; then echo "Trivy output file missing!"; exit 1; fi
+      - if grep -i "Failures" /tmp/trivy_output.txt; then
           echo "Trivy found errors! Stopping deployment.";
           exit 1;
         fi
