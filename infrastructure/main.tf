@@ -30,50 +30,19 @@ resource "aws_security_group" "ssh" {
     from_port   = 0
     to_port     = 0
     protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = [module.default_vpc.vpc_cidr_block]
+    description = "The egress for SSH security group"
   }
   ingress {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = [module.default_vpc.vpc_cidr_block]
+    description = "The ingress for SSH security group"
   }
 }
 
 module "s3" {
   source      = "./modules/s3"
-  bucket-name = "default-s3-bucket"
+  bucket-name = "default-s3-bucket-terraform-validator"
 }
-
-# module "default_lambda" {
-#   source = "terraform-aws-modules/lambda/aws"
-
-#   function_name = "default_lambda"
-#   description   = "Default Lambda function"
-#   handler       = "index.handler"
-#   runtime       = "nodejs20.x"
-#   timeout       = 60
-#   memory_size   = 256
-
-#   source_path = "./modules/lambda"
-
-#   attach_policy_json = true
-#   policy_json = jsonencode({
-#     Version = "2012-10-17",
-#     Statement = [
-#       {
-#         Effect = "Allow",
-#         Action = [
-#           "s3:PutObject",
-#           "s3:PutObjectAcl",
-#           "s3:GetObject"
-#         ],
-#         Resource = [
-#           "${module.s3.bucket_arn}",
-#           "${module.s3.bucket_arn}/*",
-#         ]
-#       }
-#     ]
-#   })
-#   ignore_source_code_hash = true
-# }

@@ -24,7 +24,7 @@ phases:
       - terraform validate
       - terraform plan --out tfplan
 
-      # Installing & running Trivy
+      # Installing & running Trivy (comment if not needed)
       - yum install -y wget tar gzip
       - echo "Installing Trivy..."
       - wget -q https://github.com/aquasecurity/trivy/releases/download/v0.59.1/trivy_0.59.1_Linux-64bit.tar.gz
@@ -33,17 +33,17 @@ phases:
       - rm trivy_0.59.1_Linux-64bit.tar.gz
       - trivy -v
       - echo "Running Trivy scan..."
-      - trivy config tfplan | tee /tmp/trivy_output.txt
+      - if [ -f ".trivyignore" ]; then trivy config --ignorefile .trivyignore tfplan | tee /tmp/trivy_output.txt; else trivy config tfplan | tee /tmp/trivy_output.txt; fi
 
       # Check if "Failures" exists in the Trivy output and stop deployment if found
-      # - if [ ! -f /tmp/trivy_output.txt ]; then echo "Trivy output file missing!"; fi
-      # - if grep -i "Failures" /tmp/trivy_output.txt; then
-      #     echo "Trivy found errors! Please fix the errors provided, and run the pipeline again.";
-      #     exit 1;
-      #   fi
-      # - echo DONE
+      - if [ ! -f /tmp/trivy_output.txt ]; then echo "Trivy output file missing!"; fi
+      - if grep -i "Failures" /tmp/trivy_output.txt; then
+          echo "Trivy found errors! Please fix the errors provided, and run the pipeline again.";
+          exit 1;
+        fi
+      - echo DONE
 
-      # Installing & running Terrascan
+      # Installing & running Terrascan (comment if not needed)
       - echo "Installing Terrascan..."
       - wget -q https://github.com/tenable/terrascan/releases/download/v1.19.9/terrascan_1.19.9_Linux_x86_64.tar.gz
       - tar -xzf terrascan_1.19.9_Linux_x86_64.tar.gz
@@ -60,8 +60,6 @@ phases:
           exit 1;
         fi
       - echo DONE
-
-      
 
 artifacts:
   files: ["**/*"]
