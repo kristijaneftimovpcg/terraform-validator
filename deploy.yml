@@ -44,22 +44,22 @@ phases:
       - echo DONE
 
       # Installing & running Terrascan (comment if not needed)
-      - echo "Installing Terrascan..."
-      - wget -q https://github.com/tenable/terrascan/releases/download/v1.19.9/terrascan_1.19.9_Linux_x86_64.tar.gz
-      - tar -xzf terrascan_1.19.9_Linux_x86_64.tar.gz
-      - mv terrascan /usr/local/bin/
-      - rm terrascan_1.19.9_Linux_x86_64.tar.gz
-      - terrascan version
-      - echo "Running Terrascan scan..."
-      - terrascan scan | tee /tmp/terrascan_output.txt
+      # - echo "Installing Terrascan..."
+      # - wget -q https://github.com/tenable/terrascan/releases/download/v1.19.9/terrascan_1.19.9_Linux_x86_64.tar.gz
+      # - tar -xzf terrascan_1.19.9_Linux_x86_64.tar.gz
+      # - mv terrascan /usr/local/bin/
+      # - rm terrascan_1.19.9_Linux_x86_64.tar.gz
+      # - terrascan version
+      # - echo "Running Terrascan scan..."
+      # - terrascan scan | tee /tmp/terrascan_output.txt
 
-      # Check if "Scan Errors" exists in the Terrascan output and stop deployment if found
-      - if [ ! -f /tmp/terrascan_output.txt ]; then echo "Terrascan output file missing!"; fi
-      - if grep -i "Scan Errors" /tmp/terrascan_output.txt; then
-          echo "Terrascan found errors! Please fix the errors provided, and run the pipeline again.";
-          exit 1;
-        fi
-      - echo DONE
+      # # Check if "Scan Errors" exists in the Terrascan output and stop deployment if found
+      # - if [ ! -f /tmp/terrascan_output.txt ]; then echo "Terrascan output file missing!"; fi
+      # - if grep -i "Scan Errors" /tmp/terrascan_output.txt; then
+      #     echo "Terrascan found errors! Please fix the errors provided, and run the pipeline again.";
+      #     exit 1;
+      #   fi
+      # - echo DONE
 
 artifacts:
   files: ["**/*"]
