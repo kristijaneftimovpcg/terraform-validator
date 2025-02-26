@@ -5,6 +5,7 @@ data "aws_availability_zones" "available-eu-west" {
   }
 }
 
+
 module "default_vpc" {
   source  = "terraform-aws-modules/vpc/aws"
   version = "~>5.0.0"
