@@ -4,13 +4,13 @@ phases:
   install:
     commands:
       # Installing Terraform
-      - echo Installing Terraform...
-      - curl -s -o terraform.zip https://releases.hashicorp.com/terraform/1.9.8/terraform_1.9.8_linux_amd64.zip
-      - unzip terraform.zip
-      - mv terraform /usr/local/bin
-      - rm terraform.zip
-      - echo TERRAFORM VERSION...
-      - terraform --version
+      # - echo Installing Terraform...
+      # - curl -s -o terraform.zip https://releases.hashicorp.com/terraform/1.9.8/terraform_1.9.8_linux_amd64.zip
+      # - unzip terraform.zip
+      # - mv terraform /usr/local/bin
+      # - rm terraform.zip
+      # - echo TERRAFORM VERSION...
+      # - terraform --version
 
   build:
     commands:
@@ -25,13 +25,13 @@ phases:
       - terraform plan --out tfplan
 
       # Installing & running Trivy (comment if not needed)
-      - yum install -y wget tar gzip
-      - echo "Installing Trivy..."
-      - wget -q https://github.com/aquasecurity/trivy/releases/download/v0.59.1/trivy_0.59.1_Linux-64bit.tar.gz
-      - tar -xzf trivy_0.59.1_Linux-64bit.tar.gz
-      - mv trivy /usr/local/bin/
-      - rm trivy_0.59.1_Linux-64bit.tar.gz
-      - trivy -v
+      # - yum install -y wget tar gzip
+      # - echo "Installing Trivy..."
+      # - wget -q https://github.com/aquasecurity/trivy/releases/download/v0.59.1/trivy_0.59.1_Linux-64bit.tar.gz
+      # - tar -xzf trivy_0.59.1_Linux-64bit.tar.gz
+      # - mv trivy /usr/local/bin/
+      # - rm trivy_0.59.1_Linux-64bit.tar.gz
+      # - trivy -v
       - echo "Running Trivy scan..."
       - if [ -f ".trivyignore" ]; then trivy config --ignorefile .trivyignore tfplan | tee /tmp/trivy_output.txt; else trivy config tfplan | tee /tmp/trivy_output.txt; fi
 
