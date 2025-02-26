@@ -63,6 +63,7 @@ resource "aws_iam_policy" "codebuild_policy" {
           "ecr:InitiateLayerUpload",
           "ecr:PutImage",
           "ecr:UploadLayerPart",
+          "ecr:BatchGetImage",
           "logs:CreateLogStream"
         ],
         Resource = "*",
