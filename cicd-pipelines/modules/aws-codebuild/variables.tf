@@ -18,10 +18,10 @@ variable "codebuild_name" {
   type        = string
 }
 
-variable "codebuild_config_role" {
-  description = "The CodeBuild default role"
-  type        = string
-}
+# variable "codebuild_config_role" {
+#   description = "The CodeBuild default role"
+#   type        = string
+# }
 
 variable "tags" {
   description = "A map of tags to add to all resources"

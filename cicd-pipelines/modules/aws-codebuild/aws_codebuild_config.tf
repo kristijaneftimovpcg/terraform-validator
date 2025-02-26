@@ -53,17 +53,19 @@ resource "aws_iam_policy" "codebuild_policy" {
 
   policy = jsonencode({
     Version = "2012-10-17",
-    Statement = [{
-      Effect   = "Allow",
-      Action   = ["*"],
-      Resource = "*",
-      },
+    Statement = [
       {
-        Sid      = "STSASSUME",
-        Effect   = "Allow",
-        Action   = "sts:AssumeRole",
-        Resource = "${var.codebuild_config_role}",
-      }
+        Effect = "Allow",
+        Action = [
+          "ecr:BatchCheckLayerAvailability",
+          "ecr:CompleteLayerUpload",
+          "ecr:GetAuthorizationToken",
+          "ecr:InitiateLayerUpload",
+          "ecr:PutImage",
+          "ecr:UploadLayerPart"
+        ],
+        Resource = "*",
+      },
     ],
   })
 }

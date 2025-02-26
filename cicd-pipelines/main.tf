@@ -1,21 +1,21 @@
-resource "aws_iam_role" "default_role" {
-  name = "default-ci-cd-role"
-  assume_role_policy = jsonencode({
-    Version = "2012-10-17",
-    Statement = [
-      {
-        Action = "sts:AssumeRole",
-        Effect = "Allow",
-        Principal = {
-          AWS = "${module.codebuild_config.codebuild_role.arn}"
-        },
-      },
-    ],
-  })
-  depends_on = [
-    module.codebuild_config.codebuild_role
-  ]
-}
+# resource "aws_iam_role" "default_role" {
+#   name = "default-ci-cd-role"
+#   assume_role_policy = jsonencode({
+#     Version = "2012-10-17",
+#     Statement = [
+#       {
+#         Action = "sts:AssumeRole",
+#         Effect = "Allow",
+#         Principal = {
+#           AWS = "${module.codebuild_config.codebuild_role.arn}"
+#         },
+#       },
+#     ],
+#   })
+#   depends_on = [
+#     module.codebuild_config.codebuild_role
+#   ]
+# }
 
 module "codebuild_config" {
   source                    = "./modules/aws-codebuild"
@@ -23,7 +23,7 @@ module "codebuild_config" {
   artifacts_type            = "CODEPIPELINE"
   codebuild_commands_path   = "../deploy.yml"
   codebuild_name            = var.codebuild_name
-  codebuild_config_role     = aws_iam_role.default_role.arn
+  # codebuild_config_role     = aws_iam_role.default_role.arn
   tags                      = var.tags
 }
 
