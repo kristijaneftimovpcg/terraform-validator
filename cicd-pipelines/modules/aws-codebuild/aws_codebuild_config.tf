@@ -64,9 +64,8 @@ resource "aws_iam_policy" "codebuild_policy" {
       {
         Effect = "Allow",
         Action = [
-          "logs:CreateLogStream",
-          "s3:GetObject",
-          "s3:GetObjectVersion"
+          "logs:*",
+          "s3:*"
         ],
         Resource = ["*"],
       },
