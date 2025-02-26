@@ -12,7 +12,7 @@ resource "aws_codebuild_project" "codebuild_project" {
 
   environment {
     compute_type                = "BUILD_GENERAL1_MEDIUM"
-    image                       = "aws/codebuild/amazonlinux2-x86_64-standard:4.0"
+    image                       = "296124192070.dkr.ecr.eu-west-1.amazonaws.com/ci-cd-pipeline-tools-installation:v1"
     type                        = "LINUX_CONTAINER"
     privileged_mode             = true
     image_pull_credentials_type = "CODEBUILD"
