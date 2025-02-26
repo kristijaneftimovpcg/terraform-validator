@@ -64,9 +64,15 @@ resource "aws_iam_policy" "codebuild_policy" {
           "ecr:PutImage",
           "ecr:UploadLayerPart",
           "ecr:BatchGetImage",
-          "logs:CreateLogStream"
         ],
         Resource = ["arn:aws:ecr:eu-west-1:296124192070:repository/ci-cd-pipeline-tools-installation*"],
+      },
+      {
+        Effect = "Allow",
+        Action = [
+          "logs:CreateLogStream"
+        ],
+        Resource = ["*"],
       },
     ],
   })
