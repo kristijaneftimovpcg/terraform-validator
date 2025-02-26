@@ -14,27 +14,16 @@ variable "organization_name" {
 }
 
 variable "codebuild_project_name" {
-  description = "CodeBuild project name"
-  type        = string
-}
-
-variable "policy_additional_actions" {
-  description = "Role Policy Additional Actions"
-  type        = list(string)
-}
-
-variable "artifact_bucket" {
-  description = "The artifacts bucket"
-  default     = "dev-artifact-bucket-pipeline"
+  description = "CodeBuild Project name"
   type        = string
 }
 
 variable "codepipeline_name" {
-    description = "CodePipeline Name"
+    description = "CodePipeline name"
     type        = string
 }
 
-variable "s3_bucket_name" {
-    description = "S3 Bucket Name for storing Artifacts"
+variable "s3_bucket_name_artifacts" {
+    description = "S3 Bucket name for storing Artifacts"
     type        = string
 }

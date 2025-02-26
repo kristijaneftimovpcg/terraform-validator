@@ -2,8 +2,7 @@
 resource "aws_s3_bucket" "bucket" {
   force_destroy = true
   bucket        = var.bucket_name
-
-  tags = var.tags
+  tags          = var.tags
 }
 
 # S3 Bucket policy with the principal role arn

@@ -1,5 +1,6 @@
+#CodeBuild
 resource "aws_codebuild_project" "codebuild_project" {
-  name          = "terraform-validator-codebuild-project"
+  name          = var.codebuild_name
   description   = "CodeBuild project"
   service_role  = aws_iam_role.codebuild_role.arn
   build_timeout = 40
@@ -26,6 +27,48 @@ resource "aws_codebuild_project" "codebuild_project" {
       status = "ENABLED"
     }
   }
-
   tags = var.tags
+}
+
+#CodeBuild Role
+resource "aws_iam_role" "codebuild_role" {
+  name = "${var.codebuild_name}-role"
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17",
+    Statement = [
+      {
+        Action = "sts:AssumeRole",
+        Effect = "Allow",
+        Principal = {
+          Service = "codebuild.amazonaws.com",
+        },
+      },
+    ],
+  })
+}
+
+resource "aws_iam_policy" "codebuild_policy" {
+  name        = "${var.codebuild_name}-policy"
+  description = "Policy for CodeBuild access"
+
+  policy = jsonencode({
+    Version = "2012-10-17",
+    Statement = [{
+      Effect   = "Allow",
+      Action   = ["*"],
+      Resource = "*",
+      },
+      {
+        Sid      = "STSASSUME",
+        Effect   = "Allow",
+        Action   = "sts:AssumeRole",
+        Resource = "${var.codebuild_config_role}",
+      }
+    ],
+  })
+}
+
+resource "aws_iam_role_policy_attachment" "codebuild_policy_attachment" {
+  policy_arn = aws_iam_policy.codebuild_policy.arn
+  role       = aws_iam_role.codebuild_role.name
 }

@@ -13,13 +13,13 @@ variable "artifacts_type" {
   type        = string
 }
 
-variable "policy_additional_actions" {
-  description = "CodeBuild Role Policy Additional Actions"
-  type        = list(string)
+variable "codebuild_name" {
+  description = "CodeBuild name"
+  type        = string
 }
 
-variable "codebuild_name" {
-  description = "CodeBuild Name"
+variable "codebuild_config_role" {
+  description = "The CodeBuild default role"
   type        = string
 }
 
@@ -27,8 +27,4 @@ variable "tags" {
   description = "A map of tags to add to all resources"
   type        = map(string)
   default     = {}
-}
-
-variable "eks_cb_kubectl_role_arn" {
-  type = string
 }

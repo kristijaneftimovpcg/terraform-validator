@@ -1,5 +1,5 @@
 variable "bucket_name" {
-  description = "Part of the Bucket Name"
+  description = "The S3 bucket name for storing Artifacts"
   type        = string
 }
 

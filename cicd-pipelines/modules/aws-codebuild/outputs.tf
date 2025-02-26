@@ -5,7 +5,7 @@ output "codebuild_project_arn" {
 
 output "codebuild_project_name" {
   value       = aws_codebuild_project.codebuild_project.name
-  description = "CodeBuild Project Name"
+  description = "CodeBuild Project name"
 }
 
 output "codebuild_role" {

@@ -1,6 +1,6 @@
 output "s3_bucket" {
   value       = aws_s3_bucket.bucket.bucket
-  description = "S3 bucket"
+  description = "S3 bucket name"
 }
 
 output "s3_bucket_id" {

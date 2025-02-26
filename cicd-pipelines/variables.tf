@@ -18,17 +18,17 @@ variable "branch" {
 
 variable "codebuild_name" {
   description = "CodeBuild name"
-  type        = string
   default     = "terraform-validator-codebuild"
+  type        = string
 }
 
 variable "codepipeline_name" {
   description = "CodePipeline Name"
-  type        = string
   default     = "terraform-validator-pipeline"
+  type        = string
 }
 
-variable "s3_bucket_name" {
+variable "s3_bucket_name_artifacts" {
   description = "S3 Bucket Name for storing Artifacts"
   default     = "terraform-validator-artifacts-bucket"
   type        = string
@@ -42,7 +42,7 @@ variable "repository_name" {
 
 variable "organization_name" {
   description = "Github Organization Name"
-  default     = "kristijaneftimovpcg"
+  default     = "PCG-International"
   type        = string
 }
 
