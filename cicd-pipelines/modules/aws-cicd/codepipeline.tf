@@ -7,7 +7,7 @@ module "s3_bucket" {
 
 # CodeStar Connection
 resource "aws_codestarconnections_connection" "github_connection" {
-  name          = "${var.repository_name}-github"
+  name          = "${var.repository_name}"
   provider_type = "GitHub"
 }
 
