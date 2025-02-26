@@ -99,8 +99,7 @@ resource "aws_iam_policy" "codepipeline_role_policy" {
           "s3:PutObject",
           "codebuild:StartBuild",
           "codebuild:BatchGetBuilds",
-          "codestar-connections:UseConnection",
-          "ecr:*"
+          "codestar-connections:UseConnection"
         ],
         Resource = "*",
       },
