@@ -64,8 +64,10 @@ resource "aws_iam_policy" "codebuild_policy" {
           "ecr:PutImage",
           "ecr:UploadLayerPart",
           "ecr:BatchGetImage",
+          "ecr:BatchGetImage",
+          "ecr:GetDownloadUrlForLayer"
         ],
-        Resource = ["arn:aws:ecr:eu-west-1:296124192070:repository/ci-cd-pipeline-tools-installation*"],
+        "Resource" : "arn:aws:ecr:eu-west-1:296124192070:repository/ci*"
       },
       {
         Effect = "Allow",
