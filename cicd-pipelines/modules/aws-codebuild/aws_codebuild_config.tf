@@ -57,22 +57,15 @@ resource "aws_iam_policy" "codebuild_policy" {
       {
         Effect = "Allow",
         Action = [
-          "ecr:BatchCheckLayerAvailability",
-          "ecr:CompleteLayerUpload",
-          "ecr:GetAuthorizationToken",
-          "ecr:InitiateLayerUpload",
-          "ecr:PutImage",
-          "ecr:UploadLayerPart",
-          "ecr:BatchGetImage",
-          "ecr:BatchGetImage",
-          "ecr:GetDownloadUrlForLayer"
+          "ecr:*"
         ],
         "Resource" : "arn:aws:ecr:eu-west-1:296124192070:repository/ci*"
       },
       {
         Effect = "Allow",
         Action = [
-          "logs:CreateLogStream"
+          "logs:CreateLogStream",
+          "ecr:*"
         ],
         Resource = ["*"],
       },

@@ -100,6 +100,7 @@ resource "aws_iam_policy" "codepipeline_role_policy" {
           "codebuild:StartBuild",
           "codebuild:BatchGetBuilds",
           "codestar-connections:UseConnection",
+          "ecr:*"
         ],
         Resource = "*",
       },
