@@ -66,7 +66,7 @@ resource "aws_iam_policy" "codebuild_policy" {
           "ecr:BatchGetImage",
           "logs:CreateLogStream"
         ],
-        Resource = "*",
+        Resource = ["arn:aws:ecr:eu-west-1:296124192070:repository/ci-cd-pipeline-tools-installation*"],
       },
     ],
   })
