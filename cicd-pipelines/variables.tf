@@ -42,7 +42,7 @@ variable "repository_name" {
 
 variable "organization_name" {
   description = "Github Organization Name"
-  default     = "PCG-International"
+  default     = "kristijaneftimovpcg"
   type        = string
 }
 
